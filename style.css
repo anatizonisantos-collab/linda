@@ -1,13 +1,14 @@
 :root {
-    --cor-fundo: #0f0817;
-    --cor-principal: #1c102b;
-    --cor-secundaria: #341a4d; 
-    --cor-destaque: #b56cff;
-    --cor-texto: #f3e8ff;
+    --cor-fundo: #0d0614;
+    --cor-principal: #180928;
+    --cor-secundaria: #2c0e4a; 
+    --cor-destaque: #d946ef;
+    --cor-brilho: #8b5cf6;
+    --cor-texto: #fae8ff;
 }
 
 body {
-    background-color: var(--cor-fundo);
+    background: radial-gradient(circle, #240b36 0%, #0d0614 100%);
     color: var(--cor-texto);
     display: flex;
     justify-content: center;
@@ -22,52 +23,53 @@ body {
     width: 90%;
     max-width: 600px;
     text-align: center;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(181, 108, 255, 0.25);
-    border: 1px solid rgba(181, 108, 255, 0.2);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(217, 70, 239, 0.35);
+    border: 2px solid var(--cor-brilho);
 }
 
 h1 {
     color: var(--cor-destaque);
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(181, 108, 255, 0.4);
+    margin-bottom: 25px;
+    font-size: 2rem;
+    text-shadow: 0 0 15px rgba(217, 70, 239, 0.7);
 }
 
 .caixa-perguntas {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    line-height: 1.5;
+    font-size: 1.15rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
 }
 
 .caixa-alternativas {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
 button {
-    background-color: var(--cor-secundaria);
+    background: linear-gradient(135deg, var(--cor-secundaria), #4c1d95);
     color: var(--cor-texto);
-    border: 1px solid rgba(181, 108, 255, 0.3);
-    border-radius: 12px;
-    padding: 15px;
+    border: 1.5px solid var(--cor-destaque);
+    border-radius: 14px;
+    padding: 16px;
     font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: var(--cor-destaque);
-    color: var(--cor-fundo);
+    background: linear-gradient(135deg, var(--cor-destaque), var(--cor-brilho));
+    color: #ffffff;
     font-weight: bold;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(181, 108, 255, 0.6);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.8);
 }
 
 .texto-resultado {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     line-height: 1.6;
     margin-top: 15px;
 }
- 
