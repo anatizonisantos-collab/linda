@@ -6,78 +6,70 @@ const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
-        enunciado: "Assim que saiu da escola você se depara com uma nova tecnologia, um chat que consegue responder todas as dúvidas que uma pessoa pode ter, ele também gera imagens e áudios hiper-realistas. Qual o primeiro pensamento?",
+        enunciado: "Você está procurando algo para assistir na noite de sexta-feira e descobre um novo filme de romance no catálogo. Qual é o seu primeiro pensamento?",
         alternativas: [
             {
-                texto: "Isso é assustador!",
-                afirmacao: [
-                "No início ficou com medo do que essa tecnologia pode fazer",
-                ""
-            ]
+                texto: "Acho fofo e adoro um bom romance!",
+                afirmacao: "Você sempre se deixa levar pelo encanto das histórias de amor."
             },
             {
-                texto: "Isso é maravilhoso!",
-                afirmacao: "afirmacao"
-            }           
-            
-        ]
-    },
-    {
-        enunciado: "Com a descoberta desta tecnologia, chamada Inteligência Artificial (IA), uma professora de tecnologia da escola decidiu fazer uma sequência de aulas sobre elaIA. No fim de uma aula ela pede que você escreva um trabalho sobre o uso de tecnologia em sala de aula. Qual atitude você toma?",
-        alternativas: [
-            {
-                texto:"Utilizar uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento",
-                afirmacao:"afirmacao"
-            },
-            {
-                texto: "Escrever o trabalho com base nas conversas que teve com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema.",
-                afirmacao:"afirmacao"
+                texto: "Acho clichê, prefiro algo com mais drama ou suspense.",
+                afirmacao: "Você prefere enredos mais complexos e com reviravoltas realistas."
             }
         ]
     },
     {
-        enunciado: "Após a elaboração do trabalho, a professora realizou um debate entre a turma para entender como foi realizada a pesquisa e escrita. Nessa conversa também foi levantado um ponto muito importante: como a IA impacta o trabalho do futuro. Nesse debate, como você se posiciona?",
+        enunciado: "Qual estilo de romance mais prende a sua atenção?",
         alternativas: [
             {
-                texto:"Me preocupo com as pessoas que perderão seus empregos para máquinas e defendem a importância de proteger os trabalhadores.",
-                afirmacao:"afirmacao"
+                texto: "Amor à primeira vista e encontros inusitados.",
+                afirmacao: "Acredita na magia dos momentos espontâneos e nas conexões instantâneas."
             },
             {
-                texto:"Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas.",
-                afirmacao:"afirmacao"
+                texto: "De inimigos a amantes (Enemies to Lovers) ou melhores amigos que se apaixonam.",
+                afirmacao: "Valoriza histórias onde o sentimento é construído com o tempo e convivência."
             }
-            
         ]
     },
     {
-        enunciado: "Ao final da discussão, você precisou criar uma imagem no computador que representasse o que pensa sobre IA. E agora?",
+        enunciado: "O casal do filme passa por um grande mal-entendido e se separa no meio da história. Como você reage?",
         alternativas: [
             {
-                texto:"Criar uma imagem utilizando uma plataforma de design como o Paint.",
-                afirmacao:"afirmacao"
+                texto: "Fico na torcida e sei que eles vão se acertar no final.",
+                afirmacao: "É uma pessoa otimista que torce sempre pelo final feliz."
             },
             {
-                texto:"Criar uma imagem utilizando um gerador de imagem de IA.",
-                afirmacao:"afirmacao"
+                texto: "Acho que a comunicação é tudo; se não conversam, talvez seja melhor terminarem.",
+                afirmacao: "MANTÉM os pés no chão e prefere maturidade nos relacionamentos."
             }
-            
         ]
     },
     {
-        enunciado: " Você tem um trabalho em grupo de biologia para entregar na semana seguinte, o andamento do trabalho está um pouco atrasado e uma pessoa do seu grupo decidiu fazer com ajuda de uma IA. O problema é que o trabalho está totalmente igual ao do chat. O que você faz?",
+        enunciado: "Chega a cena mais marcante do filme. Qual cenário ideal você escolheria para essa declaração de amor?",
         alternativas: [
             {
-                texto: "O chat pode ser uma tecnologia muito avançada, mas é preciso manter a atenção pois toda máquina erra, por isso revisar o trabalho e contribuir com as perspectivas pessoais é essencial.",
-                afirmacao:"afirmacao"
+                texto: "Uma grande declaração sob a chuva ou no topo de uma cidade iluminada.",
+                afirmacao: "Gosta de grandes gestos e momentos inesquecíveis cheios de emoção."
             },
             {
-                texto: "Escrever comandos para o chat é uma forma de contribuir com o trabalho, por isso não é um problema utilizar o texto inteiro.",
-                afirmacao:"afirmacao"
+                texto: "Uma conversa íntima e sincera em um lugar calmo e acolhedor.",
+                afirmacao: "Acredita que a verdadeira cumplicidade está nos detalhes simples do dia a dia."
             }
-            
-            
         ]
     },
+    {
+        enunciado: "Os créditos sobem e o filme termina. O que torna um filme de romance inesquecível para você?",
+        alternativas: [
+            {
+                texto: "A trilha sonora marcante e a química inegável entre os atores.",
+                afirmacao: "Sabe que a atmosfera e as sensações certas transformam uma boa cena em um clássico."
+            },
+            {
+                texto: "Uma lição de vida sobre amor-próprio e crescimento pessoal além do casal.",
+                afirmacao: "Entende que o verdadeiro amor começa quando aprendemos a amar a nós mesmos."
+            }
+        ]
+    }
 ];
 
 let atual = 0; 
@@ -85,7 +77,7 @@ let perguntaAtual;
 let historiaFinal = "";
 
 function mostraPergunta() {
-    if(atual >= perguntas.length){
+    if (atual >= perguntas.length) {
         mostraResultado();
         return;
     }
@@ -95,8 +87,8 @@ function mostraPergunta() {
     mostraAlternativas();
 }
 
-function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alternativas){
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
@@ -104,17 +96,22 @@ function mostraAlternativas(){
     }
 }
 
-function respostaSelecionada(opcaoSelecionada){
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + " ";
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacao = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacao + " ";
     atual++;
     mostraPergunta();
 }
 
-function mostraResultado(){
-    caixaPerguntas.textContent = "Em 2049...";
+function mostraResultado() {
+    caixaPerguntas.textContent = "Seu perfil em filmes de romance:";
     textoResultado.textContent = historiaFinal;
     caixaAlternativas.textContent = ""; 
 }
 
 mostraPergunta();
+   
+         
+        
+
+  
