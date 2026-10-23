@@ -1,117 +1,106 @@
-const caixaPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
-const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
-        enunciado: "Você está procurando algo para assistir na noite de sexta-feira e descobre um novo filme de romance no catálogo. Qual é o seu primeiro pensamento?",
+        enunciado: "Sexta à noite, chuva lá fora e você coloca um filme de romance. Qual o seu primeiro pensamento?",
         alternativas: [
             {
-                texto: "Acho fofo e adoro um bom romance!",
-                afirmacao: "Você sempre se deixa levar pelo encanto das histórias de amor."
+                texto: "Amo! Nada melhor do que se emocionar com uma boa história de amor.",
+                afirmacao: "Você é uma pessoa romântica assumida que adora sentir fortes emoções."
             },
             {
-                texto: "Acho clichê, prefiro algo com mais drama ou suspense.",
-                afirmacao: "Você prefere enredos mais complexos e com reviravoltas realistas."
+                texto: "Gosto, mas prefiro quando o filme foca mais na comédia ou no drama do que só no mormaço.",
+                afirmacao: "Você busca histórias dinâmicas e com bom humor acima de tudo."
             }
         ]
     },
     {
-        enunciado: "Qual estilo de romance mais prende a sua atenção?",
+        enunciado: "Qual a melhor dinâmica entre o casal do filme para prender sua atenção?",
         alternativas: [
             {
-                texto: "Amor à primeira vista e encontros inusitados.",
-                afirmacao: "Acredita na magia dos momentos espontâneos e nas conexões instantâneas."
+                texto: "Inimigos que se odeiam no início e terminam apaixonados (Enemies to Lovers).",
+                afirmacao: "Adora ver a evolução do sentimento e a tensão entre os personagens."
             },
             {
-                texto: "De inimigos a amantes (Enemies to Lovers) ou melhores amigos que se apaixonam.",
-                afirmacao: "Valoriza histórias onde o sentimento é construído com o tempo e convivência."
+                texto: "Melhores amigos de infância que percebem que nasceram um para o outro.",
+                afirmacao: "Acredita que o carinho e a amizade verdadeira são a base de qualquer amor."
             }
         ]
     },
     {
-        enunciado: "O casal do filme passa por um grande mal-entendido e se separa no meio da história. Como você reage?",
+        enunciado: "O casal passa por aquele clássico mal-entendido e se separa. Qual a sua reação?",
         alternativas: [
             {
-                texto: "Fico na torcida e sei que eles vão se acertar no final.",
-                afirmacao: "É uma pessoa otimista que torce sempre pelo final feliz."
+                texto: "Fico com o coração na mão, mas sei que vão se reconciliar até os créditos.",
+                afirmacao: "Torce sempre por finais felizes e reencontros emocionantes."
             },
             {
-                texto: "Acho que a comunicação é tudo; se não conversam, talvez seja melhor terminarem.",
-                afirmacao: "MANTÉM os pés no chão e prefere maturidade nos relacionamentos."
+                texto: "Passo raiva! Se conversassem por 5 minutos resolviam tudo.",
+                afirmacao: "Valoriza a maturidade, a razão e a comunicação franca."
             }
         ]
     },
     {
-        enunciado: "Chega a cena mais marcante do filme. Qual cenário ideal você escolheria para essa declaração de amor?",
+        enunciado: "Na hora da grande declaração de amor, qual cenário é perfeito?",
         alternativas: [
             {
-                texto: "Uma grande declaração sob a chuva ou no topo de uma cidade iluminada.",
-                afirmacao: "Gosta de grandes gestos e momentos inesquecíveis cheios de emoção."
+                texto: "Correndo no aeroporto ou se declarando debaixo de tempestade.",
+                afirmacao: "Ama gestos grandiosos, cinematográficos e intensos."
             },
             {
-                texto: "Uma conversa íntima e sincera em um lugar calmo e acolhedor.",
-                afirmacao: "Acredita que a verdadeira cumplicidade está nos detalhes simples do dia a dia."
+                texto: "Um olhar sincero em um café calmo no final da tarde.",
+                afirmacao: "Prefere momentos íntimos, sutis e cheios de significado verdadeiro."
             }
         ]
     },
     {
-        enunciado: "Os créditos sobem e o filme termina. O que torna um filme de romance inesquecível para você?",
+        enunciado: "O filme acaba. O que faz essa produção ser inesquecível para você?",
         alternativas: [
             {
-                texto: "A trilha sonora marcante e a química inegável entre os atores.",
-                afirmacao: "Sabe que a atmosfera e as sensações certas transformam uma boa cena em um clássico."
+                texto: "Uma trilha sonora marcante que me faz lembrar do filme sempre que ouço.",
+                afirmacao: "Acredita que a música certa transforma qualquer momento em mágica purinha."
             },
             {
-                texto: "Uma lição de vida sobre amor-próprio e crescimento pessoal além do casal.",
-                afirmacao: "Entende que o verdadeiro amor começa quando aprendemos a amar a nós mesmos."
+                texto: "Personagens bem construídos que aprendem a se amar antes de amar alguém.",
+                afirmacao: "Entende que o crescimento pessoal e o amor-próprio são a verdadeira chave."
             }
         ]
     }
 ];
 
-let atual = 0; 
-let perguntaAtual;
-let historiaFinal = "";
+let posicao = 0;
+let historiaConstruida = "";
 
-function mostraPergunta() {
-    if (atual >= perguntas.length) {
-        mostraResultado();
+function carregarPergunta() {
+    if (posicao >= perguntas.length) {
+        exibirResultado();
         return;
     }
-    perguntaAtual = perguntas[atual];
+    
+    const perguntaAtual = perguntas[posicao];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
-    caixaAlternativas.textContent = "";
-    mostraAlternativas();
+    caixaAlternativas.innerHTML = "";
+    
+    perguntaAtual.alternativas.forEach(opcao => {
+        const botao = document.createElement("button");
+        botao.textContent = opcao.texto;
+        botao.addEventListener("click", () => processarEscolha(opcao.afirmacao));
+        caixaAlternativas.appendChild(botao);
+    });
 }
 
-function mostraAlternativas() {
-    for (const alternativa of perguntaAtual.alternativas) {
-        const botaoAlternativas = document.createElement("button");
-        botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
-        caixaAlternativas.appendChild(botaoAlternativas);
-    }
+function processarEscolha(afirmacao) {
+    historiaConstruida += afirmacao + " ";
+    posicao++;
+    carregarPergunta();
 }
 
-function respostaSelecionada(opcaoSelecionada) {
-    const afirmacao = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacao + " ";
-    atual++;
-    mostraPergunta();
+function exibirResultado() {
+    caixaPerguntas.textContent = "Seu Perfil Romântico:";
+    textoResultado.textContent = historiaConstruida;
+    caixaAlternativas.innerHTML = "";
 }
 
-function mostraResultado() {
-    caixaPerguntas.textContent = "Seu perfil em filmes de romance:";
-    textoResultado.textContent = historiaFinal;
-    caixaAlternativas.textContent = ""; 
-}
-
-mostraPergunta();
-   
-         
-        
-
-  
+carregarPergunta();
