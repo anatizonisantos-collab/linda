@@ -1,75 +1,86 @@
 :root {
-    --cor-fundo: #0d0614;
-    --cor-principal: #180928;
-    --cor-secundaria: #2c0e4a; 
-    --cor-destaque: #d946ef;
-    --cor-brilho: #8b5cf6;
-    --cor-texto: #fae8ff;
+    --bg-fundo: #090212;
+    --bg-card: rgba(27, 9, 48, 0.85);
+    --roxo-vibrante: #a855f7;
+    --roxo-neon: #d8b4fe;
+    --rosa-choque: #f43f5e;
+    --texto-claro: #f3e8ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background: radial-gradient(circle, #240b36 0%, #0d0614 100%);
-    color: var(--cor-texto);
+    background: radial-gradient(circle at center, #2e1065 0%, #090212 100%);
+    color: var(--texto-claro);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
+    font-family: 'Poppins', Segoe UI, sans-serif;
+    padding: 20px;
 }
 
 .caixa-principal {
-    background-color: var(--cor-principal);
-    width: 90%;
-    max-width: 600px;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    width: 100%;
+    max-width: 580px;
     text-align: center;
-    padding: 35px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(217, 70, 239, 0.35);
-    border: 2px solid var(--cor-brilho);
+    padding: 40px 30px;
+    border-radius: 24px;
+    border: 2px solid rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.3), 0 0 10px rgba(244, 63, 94, 0.2);
 }
 
 h1 {
-    color: var(--cor-destaque);
+    color: var(--roxo-neon);
+    font-size: 2.2rem;
     margin-bottom: 25px;
-    font-size: 2rem;
-    text-shadow: 0 0 15px rgba(217, 70, 239, 0.7);
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
+    letter-spacing: 0.5px;
 }
 
 .caixa-perguntas {
     font-size: 1.15rem;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     line-height: 1.6;
+    font-weight: 300;
 }
 
 .caixa-alternativas {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
 }
 
 button {
-    background: linear-gradient(135deg, var(--cor-secundaria), #4c1d95);
-    color: var(--cor-texto);
-    border: 1.5px solid var(--cor-destaque);
-    border-radius: 14px;
-    padding: 16px;
+    background: linear-gradient(135deg, #3b0764, #6b21a8);
+    color: var(--texto-claro);
+    border: 1px solid var(--roxo-vibrante);
+    border-radius: 16px;
+    padding: 18px 20px;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
-    background: linear-gradient(135deg, var(--cor-destaque), var(--cor-brilho));
+    background: linear-gradient(135deg, var(--roxo-vibrante), var(--rosa-choque));
     color: #ffffff;
-    font-weight: bold;
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 0 20px rgba(217, 70, 239, 0.8);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.7);
+    border-color: #ffffff;
 }
 
 .texto-resultado {
     font-size: 1.15rem;
-    line-height: 1.6;
-    margin-top: 15px;
+    line-height: 1.7;
+    margin-top: 10px;
+    color: var(--roxo-neon);
 }
